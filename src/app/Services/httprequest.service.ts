@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, subscribeOn } from 'rxjs/operators';
+import { CityData } from '../modules/city-data';
 
 
 
@@ -12,22 +13,24 @@ export class HTTPrequestService {
 
   constructor(private http: HttpClient) { }
 
-  BaseUrl: string = 'https://apiadvisor.climatempo.com.br/api/v1/locale/city?province=SP&token=51a4173d9feffc51771fd70398960ec1'
+  //private BaseUrl: string = 'https://apiadvisor.climatempo.com.br/api/v1/locale/city?province=SP&token=51a4173d9feffc51771fd70398960ec1'
+  public BaseUrl: string = 'http://localhost:3000/list-City'
 
-
-  //Oferece dados da API
-  get getCity(): Observable<any> {
-
-    // console.log(this.BaseUrl)
-    //Share and get online data provided by API
-    return this.http.get<any>(this.BaseUrl).pipe(
-      tap((res) => res),
-
-    )
-
-  }
 
   public emitEvent = new EventEmitter();
+
+  //Oferece dados da API
+  public getCity(): Observable<CityData> {
+
+    return this.http.get<CityData>(this.BaseUrl)
+      .pipe(
+        res => res,
+        error => error
+      )
+  }
+
+
+
 
   //Instance of Local Data
   private CityList: Array<string> = [
@@ -50,11 +53,18 @@ export class HTTPrequestService {
 
   }
 
-
- 
-
   public ListCityAlert(value: string) {
     return this.emitEvent.emit(value)
+
+  }
+
+
+  public AddSalvaList(value: string): Observable<CityData> {
+
+    return this.http.post<CityData>(this.BaseUrl, { name : value }).pipe(
+      res => res,
+      error => error
+    )
 
   }
 

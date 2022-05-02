@@ -1,7 +1,9 @@
-<h3>Cidades</h3>
-<ul *ngFor="let item of listLocal">
-    <li>Cidades {{ item }}</li>
-</ul>
-
 <input #inputValue>
 <button (click)="listAddItem(inputValue.value)">Add Item</button>
+
+
+
+<h3>Cidades</h3>
+<ul *ngFor="let item of listLocal">
+    <li>Cidade {{ item.name }}</li>
+</ul>
