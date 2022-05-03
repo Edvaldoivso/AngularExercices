@@ -1,8 +1,9 @@
+<p [ngClass]="{'alerta': valor , 'sucesso' : !valor}"> Coloque uma cidade antes no campo abaixo </p>
+
+
+
 <input #inputValue>
-<button (click)="listAddItem(inputValue.value)">Add Item</button>
-
-
-
+<button (click)="AddItemServer(inputValue.value) ; Alertas(inputValue.value)">Add Item </button>
 <h3>Cidades</h3>
 <ul *ngFor="let item of listLocal">
     <li>Cidade {{ item.name }}</li>

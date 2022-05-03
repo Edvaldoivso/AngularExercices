@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subscriber, tap } from 'rxjs';
 import { catchError, retry, subscribeOn } from 'rxjs/operators';
 import { CityData } from '../modules/city-data';
 
@@ -64,8 +64,11 @@ export class HTTPrequestService {
     return this.http.post<CityData>(this.BaseUrl, { name : value }).pipe(
       res => res,
       error => error
+     
     )
 
   }
+
+
 
 }

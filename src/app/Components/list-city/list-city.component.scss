@@ -1,0 +1,15 @@
+.alerta {
+    background-color: red;
+    text-decoration: dotted;
+    font-size: 40px;
+    font-weight: 700;
+    color: aliceblue;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sucesso {
+    display: none;
+}
